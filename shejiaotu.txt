@@ -1,9 +1,17 @@
-4
-A 0 0
-B 0 2
-C 0 3
-D 0 4
 6
+A 0 0
+B 0 3
+C 4 3
+D 4 0
+E 0 6
+F 4 6
+9
 A B
+A C
+A D
 B C
+B D
 C D
+B E
+B F
+E F

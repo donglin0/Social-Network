@@ -27,6 +27,12 @@
     <ClCompile Include="Dijkstra.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BFS.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DblLinkedQueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphmtx.h">
@@ -36,6 +42,12 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="Dijkstra.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DblLinkedQueue.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

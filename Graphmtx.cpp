@@ -10,7 +10,7 @@ Graphmtx::Graphmtx(int sz) { //构造函数
 		Edge[i] = new E[maxVertices];//
 	for (i = 0; i < maxVertices; i++) //邻接矩阵初始化
 		for (j = 0; j < maxVertices; j++)
-			Edge[i][j] = (i == j) ? -1 : maxWeight;//表示自身和没有联系
+			Edge[i][j] = (i == j) ? 0 : maxWeight;//表示自身和没有联系
 };
 
 
@@ -52,19 +52,19 @@ bool Graphmtx::removeEdge(int v1, int v2)
 	else return false;
 };
 
-
 bool Graphmtx::removeVertex(int v)
 { //在图中删去顶点v以及所有与它相关联的边
 	if (v < 0 || v >= numVertices) return false; //v不在图中，不删除
-	if (numVertices == 1) return false; //只剩一个顶点，不删除
+	if (numVertices == 1) { numVertices--; return false; } //只剩一个顶点
 	int i, j;
 	VerticesList[v] = VerticesList[numVertices - 1];
 	//顶点表中删除该结点，用最后一个顶点填补第v个顶点
+
 	for (i = 0; i < numVertices; i++) //减去与v相关联边数
 		if (Edge[i][v] > 0 && Edge[i][v] < maxWeight) numEdges--;
 	for (i = 0; i < numVertices; i++) //用最后一列填补第v列
 		Edge[i][v] = Edge[i][numVertices - 1];
-	numVertices--; //顶点数减1
+		numVertices--; //顶点数减1
 	for (j = 0; j < numVertices; j++) //用最后一行填补第v行
 		Edge[v][j] = Edge[numVertices][j];
 	return true;
@@ -82,7 +82,6 @@ int Graphmtx::getFirstNeighbor(int v) {
 	return -1;
 };
 
-
 int Graphmtx::getNextNeighbor(int v, int w) {
 	//给出顶点 v 的某邻接顶点 w 的下一个邻接顶点
 	if (v != -1 && w != -1) {
@@ -93,9 +92,8 @@ int Graphmtx::getNextNeighbor(int v, int w) {
 	return -1;
 };
 
-
 istream& operator >> (istream& in, Graphmtx& G) {
-	int i, j, k, n, m; T e1, e2; E weight;
+	int i, j, k, n, m; T e1, e2; 
 	cout << "请输入顶点数、边数：\n";
 	in >> n >> m;
 	cout << "请输入各顶点信息中的名字和地理坐标（x,y）：\n";
@@ -131,14 +129,14 @@ ostream& operator << (ostream& out, Graphmtx& G) {
 	for (i = 0; i < n; i++)
 		for (j = i + 1; j < n; j++) {
 			w = G.getWeight(i, j);		
-			if (w >= 0 && w < G.maxWeight)
+			if (w > 0 && w < G.maxWeight)
 			{
 				e1 = G.getValue(i); e2 = G.getValue(j);
 				out << "(" << e1.name << "," << e2.name << "," << setiosflags(ios::fixed) << setprecision(1)//控制小数精度 
 					<< w<< ")" << endl;
 			}
 		}
-	cout << endl <<"图的邻接矩阵为：" << endl;
+	if(n) cout << endl <<"图的邻接矩阵为：" << endl;
 	int count_row = 0; //打印行的标签
 	int count_col = 0; //打印列的标签
 	//开始打印
@@ -154,6 +152,38 @@ ostream& operator << (ostream& out, Graphmtx& G) {
 		cout << endl;
 		++count_row;
 	}
-
 	return out;
 };
+
+
+int Graphmtx::InDegree(char name) {
+	//计算顶点v 的入度，若顶点不存在，则函数返回-1
+	int k = getVertexPos(name);
+	if (k != -1) { //顶点v存在
+		int count = 0; //保存顶点的入度
+		for (int i = 0; i < numVertices; i++) {		
+				if (i == k) continue;
+				if (Edge[i][k] > 0 && Edge[i][k] < maxWeight) {
+					count++;//如果权值合理则该入边存在
+				}
+		}
+		return count;
+	}
+	return -1; //顶点v不存在
+}
+
+int Graphmtx::OutDegree(char name) {
+	//计算顶点v 的入度，若顶点不存在，则函数返回-1
+	int k = getVertexPos(name);
+	if (k != -1) { //顶点v存在
+		int count = 0; //保存顶点的入度
+		for (int i = 0; i < numVertices; i++) {
+			if (i == k) continue;
+			if (Edge[k][i] > 0 && Edge[k][i] < maxWeight) {
+				count++;//如果权值合理则该入边存在
+			}
+		}
+		return count;
+	}
+	return -1; //顶点v不存在
+}

@@ -147,12 +147,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BFS.cpp" />
+    <ClCompile Include="DblLinkedQueue.cpp" />
     <ClCompile Include="DFS.cpp" />
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Graphmtx.cpp" />
     <ClCompile Include="社交网络样板1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BFS.h" />
+    <ClInclude Include="DblLinkedQueue.h" />
     <ClInclude Include="DFS.h" />
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Graphmtx.h" />

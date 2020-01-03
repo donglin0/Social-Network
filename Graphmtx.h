@@ -2,15 +2,18 @@
 #include <iostream>
 #include<string>
 #include<iomanip>//控制输出格式
+#include<Windows.h>
 #include<math.h>
 using namespace std;
+
 const int DefaultVertices = 30; //最大顶点数(=n)
 const int DefaultEdge = DefaultVertices *(DefaultVertices-1)/2; //最大边数(=n)
 
 struct people {
-	char name;
-	int x;//名字信息
-	int y;//地理坐标信息
+	char name;//名字信息
+	//地理坐标信息
+	int x;
+	int y;
 };
 
 typedef people T;
@@ -69,8 +72,9 @@ public:
 	bool insertEdge(int v1, int v2);//插入边(v1, v2)，权值为cost
 	bool removeVertex(int v);//删去顶点 v 和所有与它相关联的边
 	bool removeEdge(int v1, int v2);//在图中删去边(v1,v2)
+	int InDegree(char name);//求顶点的入度
+	int OutDegree(char name);//求顶点的出度
 };
-
 
 typedef struct RowCol//边信息结构体定义
 {

@@ -1,6 +1,5 @@
 #include"Dijkstra.h"
 
-
 void Dijkstra(Graphmtx& G, int v,E dist[], int path[]) {
 	//Graph是一个带权有向图。dist[j]（0≤j<n）是
 	//当前求到的从顶点 v 到顶点 j 的最短路径长度，
@@ -59,7 +58,7 @@ void Dijkstra_print(Graphmtx& G, int v1, E dist[], int path[] ,int v2)//从path[]
 				cout << G.getValue(d[k--]).name<< "->";	
 			}
 			cout<<G.getValue(i).name;
-			cout << "\t最短权值：" << dist[i] << endl << endl;
+			cout << "\t最短距离：" << dist[i] << endl << endl;
 		delete[] d;//注意释放空间的位置不然会导致访问权限冲突
 		}
 };
